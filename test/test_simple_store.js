@@ -1,3 +1,5 @@
+const { assert } = require('chai');
+
 require('chai')
 .use(require('chai-as-promised'))
 .should();
@@ -28,9 +30,9 @@ contract("FakeToken", (accounts) => {
             let balance = await fake.balanceOf(accounts[1])
             console.log(balance.toString(), web3.utils.toWei("0.1", "ether"))
             // tokenBought.toString()
-            tokenLeft = await fake.tokenLeftUnMint()
-            console.log(tokenLeft.toString(), " tokenLeft")
+            let tokenLeftAfter = await fake.tokenLeftUnMint()
             
+            assert(tokenLeft != tokenLeftAfter)
         })
     })
 })
